@@ -9,6 +9,7 @@ urlpatterns = [
     path("routes/<int:route_id>/finish/", views.DriverFinishesRouteView.as_view()),
     path("routes/<int:route_id>/cancel/", views.DispatcherClosesRoute.as_view()),
     path("driver_routes/", views.DriverRoutes.as_view()),
+    path("drivers_routes_today/", views.DriverRoutesToday.as_view()),
     path("created_routes/", views.UserCreatedRoutes.as_view()),
     path("create_new_route/", views.create_route),
     path("routes/<int:route_id>/history/", views.route_history),

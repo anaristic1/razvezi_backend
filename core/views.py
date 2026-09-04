@@ -72,6 +72,19 @@ class UserCreatedRoutes(generics.ListCreateAPIView):
         )
 
 
+class DriverRoutesToday(generics.ListCreateAPIView):
+    serializer_class = RouteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        start_this_day = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        return Route.objects.filter(
+            taken_by=user,
+            date_created__gte=start_this_day,
+        )
+
+
 class DriverRoutes(generics.ListCreateAPIView):
     """ Driver will not see his finished rides. """
     serializer_class = RouteSerializer
