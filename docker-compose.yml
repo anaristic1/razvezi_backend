@@ -2,15 +2,13 @@ services:
  redis:
    image: redis:7-alpine
    container_name: redis
-   ports:
-     - "6379:6379"
 
  django-web:
    image: anar1/razvezi_backend:latest
    container_name: django-docker
    restart: always
    ports:
-     - "8000:8000"
+     - "127.0.0.1:8000:8000"
    depends_on:
      - redis
    env_file:

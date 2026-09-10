@@ -78,10 +78,9 @@ class DriverRoutesToday(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        start_this_day = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
         return Route.objects.filter(
             taken_by=user,
-            date_created__gte=start_this_day,
+            date_created__date=timezone.localdate(),
         )
 
 

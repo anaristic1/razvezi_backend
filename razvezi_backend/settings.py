@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = bool(os.environ.get("DEBUG", default=0))
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS","127.0.0.1").split(",")
+ALLOWED_HOSTS = [
+    "razvezi.com",
+]
 
 
 # Application definition
@@ -124,10 +126,15 @@ AUTH_USER_MODEL = "core.User"
 CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:8000']
 
 
-# ONLY IN DEV
+# HTTPS
 
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+CSRF_TRUSTED_ORIGINS = [
+    "https://razvezi.com",
+]
 
 
 # CHANNELS
